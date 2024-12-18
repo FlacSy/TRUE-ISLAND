@@ -73,23 +73,25 @@ async function generateAdvertisement() {
 }
 
 async function selectLang() {
-    document.getElementById("language-switch").addEventListener("click", async () => {
-        const langElement = document.getElementById("select-lang");
+    const langElement = document.getElementById("select-lang");
 
+    if (!langElement) {
+        console.error("Language switch or select-lang element not found in the DOM.");
+        return;
+    }
+
+    langElement.addEventListener("click", async () => {
         const currentLang = langElement.innerText;
 
-        let newLang = "EN";
+        let newLang = "🏳️‍🌈ENG";
 
-        if (currentLang === "ENG") {
-            newLang = "PL";
-        } else if (currentLang === "PL") {
-            newLang = "ENG";
-        } else {
-            newLang = "ENG";
+        if (currentLang === "🏳️‍🌈ENG") {
+            newLang = "🏳️‍⚧️PL";
+        } else if (currentLang === "🏳️‍⚧️PL") {
+            newLang = "🏳️‍🌈ENG";
         }
 
         langElement.innerText = newLang;
-
     });
 }
 
@@ -97,7 +99,7 @@ async function selectLang() {
 async function main() {
     await getHighlights();
     await generateAdvertisement();
-    selectLang();
+    await selectLang();
 }
 
 document.addEventListener('DOMContentLoaded', main);
